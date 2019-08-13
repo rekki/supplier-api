@@ -33,7 +33,7 @@ example response:
       "confirmed_at": "2019-08-12T12:20:10.968294",
       "delivery_address": "Test, Test",
       "delivery_on": "2019-08-29",
-      "inserted_at": "2019-08-10T19:27:45",
+      "inserted_at_ts": 1565458065,
       "notes": "please pick yellow peppers",
       "reference": "A16915",
       "supplier_notes": "please use back entrance",
@@ -58,7 +58,7 @@ fields:
 * `confirmed_at` the time at which the supplier confirmed the order (via email or from the REKKI supplier app)
 * `delivery_address` delivery address for this specific order (address, postcode)
 * `delivery_on` expected delivery date (when users place orders they specify for which day it is supposed to be delivered)
-* `inserted_at` when was the order created by the customer
+* `inserted_at_ts` when was the order created by the customer (timestamp)
 * `notes` defined by the user at the moment of making an order and usually refer to that specific order (e.g. "please send fresher tomatoes")
 * `supplier_notes` , notes define by the user for the supplier, usually being common across orders (e.g.: "please use the side entrance for delivery")
 * `reference` REKKI's order reference
@@ -108,9 +108,8 @@ const poll = async function(token, last_rekki_order_time) {
     let response = await fetch_orders(token, last_rekki_order_time);
 
     for (let order of response.orders) {
-      let current_order_time = new Date(order.inserted_at).getTime() / 1000;
-      if (current_order_time >= last_rekki_order_time) {
-        last_rekki_order_time = current_order_time;
+      if (order.inserted_at_ts >= last_rekki_order_time) {
+        last_rekki_order_time = order.inserted_at_ts;
         last_order_reference = order.reference;
       }
       if (order.reference == last_order_reference) {
