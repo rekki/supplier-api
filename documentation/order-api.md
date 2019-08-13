@@ -108,12 +108,12 @@ const poll = async function(token, last_rekki_order_time) {
     let response = await fetch_orders(token, last_rekki_order_time);
 
     for (let order of response.orders) {
+      if (order.reference == last_order_reference) {
+        continue;
+      }    
       if (order.inserted_at_ts >= last_rekki_order_time) {
         last_rekki_order_time = order.inserted_at_ts;
         last_order_reference = order.reference;
-      }
-      if (order.reference == last_order_reference) {
-        continue;
       }
 
       // process(order)
