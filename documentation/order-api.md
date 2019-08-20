@@ -10,7 +10,7 @@ There are two mandatory parameters for the call:
 
 * `XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX` is the token for API authentication that is attributed by REKKI to each supplier, please contact suppliers@rekki.com to request one. 
 
-* `{"since":1565610869}` **since** is the epoch timestamp (seconds since 01/01/1970 00:00) and will filter the orders **after** the timestamp. A very common use case is to `poll` for orders since the last successful request to avoid losing any information. The requested timestamp **must** be within the last 30 days
+* `{"since":1565610869}` **since** is the epoch timestamp (seconds since 01/01/1970 00:00) and will filter the orders **after** the timestamp. A very common use case is to `poll` for orders since the last successful request to avoid losing any information. The requested timestamp **must** be within the last 30 days.
 
 
 example request:
