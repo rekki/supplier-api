@@ -6,12 +6,13 @@ To retrieve a list of orders from a supplier, please use the following endpoint:
 
 > POST `https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier`
 
-There are two mandatory parameters for the call: 
+There are three mandatory parameters for the call: 
 
 * `XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX` is the token for API authentication that is attributed by REKKI to each supplier, please contact suppliers@rekki.com to request one. (send in header "authorization: Bearer"
 
 * `{"since":1565610869}` send as POST body, **since** is the epoch timestamp (seconds since 01/01/1970 00:00) and will filter the orders **after** the timestamp. A very common use case is to `poll` for orders since the last successful request to avoid losing any information. The requested timestamp **must** be within the last 30 days. 
 
+* `Content-Type: application/json` header is mandatory as well
 
 example request:
 
