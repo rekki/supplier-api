@@ -17,9 +17,9 @@ There are three mandatory parameters for the call:
 example request:
 
 ```
-curl -XPOST 'https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier' \
+curl -XPOST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
    -H "Content-Type: application/json"
-   -H 'authorization: Bearer XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX' \
+   -H "authorization: Bearer XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX" \
    -d '{"since":1565610869}'
 ```
 
