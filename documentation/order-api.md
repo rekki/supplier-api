@@ -18,12 +18,15 @@ There are three mandatory parameters for the call:
 
 ```bash
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
-   -H "Content-Type: application/json" \
-   -H "authorization: Bearer XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX" \
-   -d "{\"since\":1565610869}"
+     -H "Content-Type: application/json" \
+     -H "authorization: Bearer XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX" \
+     -d "{\"since\":1565610869}"
 ```
 
 ### Example response
+
+The JSON response includes a list of orders that were created since the given timestamp.  
+Each order has metadata such as delivery date and order items.
 
 ```json
 {
