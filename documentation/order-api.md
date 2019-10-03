@@ -1,10 +1,10 @@
 # REKKI
 
-## list orders
+## List orders
 
 To retrieve a list of orders from a supplier, please use the following endpoint:
 
-> POST `https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier`
+`POST https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier`
 
 There are three mandatory parameters for the call: 
 
@@ -14,7 +14,7 @@ There are three mandatory parameters for the call:
 
 * `Content-Type: application/json` header is mandatory as well
 
-example request:
+### Example request
 
 ```bash
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
@@ -23,10 +23,9 @@ curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders
    -d "{\"since\":1565610869}"
 ```
 
-example response:
+### Example response
 
-```
-
+```json
 {
   "orders": [
     {
@@ -53,7 +52,7 @@ example response:
 }
 ```
 
-fields:
+### Response properties
 
 * `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://tulip.rekki.com ). 
 * `confirmed_at` the time at which the supplier confirmed the order (via email or from the REKKI supplier app)
@@ -71,13 +70,11 @@ fields:
 * `item.name` item name as defined on the customer product list 
 * `item.units` item unit as defined on the customer product list 
 
+### Example usage
 
-example of usage: 
+In this JavaScript example, all orders are retrieved. Then it keeps pulling for new orders since the last order, every hour. 
 
-In this example all orders are retrieved and then it keeps pulling for new orders since the last order hour by hour. 
-
-```
-
+```js
 const fetch = require("node-fetch");
 
 const sleep = function sleep(ms) {
@@ -101,7 +98,6 @@ const fetch_orders = async function(token, since) {
 };
 
 const poll = async function(token, last_rekki_order_time) {
-
   let last_order_reference = undefined;
 
   while (true) {
@@ -125,5 +121,4 @@ const poll = async function(token, last_rekki_order_time) {
 };
 
 poll("XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX", parseInt((+new Date() /1000) - 3600 * 24 * 30));
-
 ```
