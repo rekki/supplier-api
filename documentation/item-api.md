@@ -86,28 +86,28 @@ Status: `200 OK`
 
 Body: JSON object with a `data` property that contains catalog items of the authenticated supplier.
 
-- **`id`**
+- **`id`**  
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
-- **`product_code`**
-  Product code for the item that maps to the supplier's catalog.
+- **`product_code`**  
+  Product code for the item that maps to the supplier's catalog.  
   Suppliers can modify the product code for future orders at https://tulip.rekki.com
-- **`name`**
+- **`name`**  
   Item name as would be defined on the customer's product list.
-- **`currency`**
+- **`currency`**  
   Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
-- **`units_prices`**
-  List of units and their prices that the item can be ordered in.
-- **`units_prices.unit`**
+- **`units_prices`**  
+  List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  
   A unit that the item can be ordered in.
-- **`units_prices.price_cents`**
-  The order price in cents for the item per unit.
-  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
+- **`units_prices.price_cents`**  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
   Items without price data will show a default placeholder of 0.
-- **`created_at`**
-  Datetime when the catalog item was created on REKKI.
+- **`created_at`**  
+  Datetime when the catalog item was created on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
-- **`updated_at`**
-  Datetime when the catalog item was last updated on REKKI.
+- **`updated_at`**  
+  Datetime when the catalog item was last updated on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
 
 ### Example Request
@@ -160,6 +160,107 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 
 </details>
 
+---
+
+## ADD ITEM
+### `POST /api/catalog/integration/v1/items`
+<!-- <details><summary>Show details</summary> -->
+
+Creates an item on your catalog.
+
+### Parameters
+
+- **`product_code`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  Product code for the item that maps to the supplier's catalog.  
+  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+- **`name`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  Item name as would be defined on the customer's product list.
+- **`currency`**  <span style="font-size: 12px; font-weight: 500;">optional, default is GBP</span>  
+  Currency code for the price. In [ISO 4217][] three-letter format.
+- **`units_prices`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  A unit that the item can be ordered in.
+- **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
+
+### Response
+
+Status: `201 Created`
+
+Body: JSON object of the item that was added to the catalog of the authenticated supplier.
+
+- **`id`**  
+  REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
+- **`product_code`**  
+  Product code for the item that maps to the supplier's catalog.  
+  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+- **`name`**  
+  Item name as would be defined on the customer's product list.
+- **`currency`**  
+  Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
+- **`units_prices`**  
+  List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  
+  A unit that the item can be ordered in.
+- **`units_prices.price_cents`**  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+  Items without price data will show a default placeholder of 0.
+- **`created_at`**  
+  Datetime when the catalog item was created on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+- **`updated_at`**  
+  Datetime when the catalog item was last updated on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+
+### Example Request
+
+```bash
+curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
+     -H "Authorization: Bearer $API_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d @item_data.json
+```
+
+Where `item_data.json` contains the payload
+```json
+{
+  "product_code": "C1235",
+  "name": "Organic Banana",
+  "currency": "GBP",
+  "units_prices": [
+    {"unit": "each", "price_cents": 100},
+    {"unit": "kg", "price_cents": 1000}
+  ]
+}
+```
+
+### Example Response
+
+```json
+{
+  "id": 44724,
+  "product_code": "C1235",
+  "name": "Organic Banana",
+  "currency": "GBP",
+  "units_prices": [
+    {
+      "unit": "each",
+      "price_cents": 100
+    },
+    {
+      "unit": "kg",
+      "price_cents": 1000
+    }
+  ],
+  "created_at": "2019-11-10T20:57:22Z",
+  "updated_at": "2019-11-10T20:57:22Z"
+}
+```
+
+</details>
 
 [ISO 4217]: https://en.wikipedia.org/wiki/ISO_4217
 [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
