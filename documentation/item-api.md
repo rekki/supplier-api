@@ -6,22 +6,67 @@ The base URL for all API endpoints is **`https://backend.live.rekki.com`**.
 
 ### Authentication
 
-Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.
+Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.  
 Unauthenticated requests will receive a `401 Unauthorized` response.
 
 Contact integrations@rekki.com for an API token.
 
 ### Parameters
 
-Some endpoints may take parameters in the URL, such as segments in the path or key-values in a query string.
+Some endpoints may take parameters in the URL, such as segments in the path or key-values in a query string.  
 For example `GET https://example.com/api/resource/:id?limit=10`.
 
-Some endpoints may take parameters outside the URL, typically `POST`, `PATCH`, `PUT`, and `DELETE` requests.
-These requests _must_ specify a JSON encoding with a content-type header <strong>`Content-Type: application/json`</strong>.
-Unencoded requests to endpoints that expect an encoding for the payload, will receive a `400 Bad Request` response.
+Some endpoints may take parameters outside the URL, typically `POST`, `PATCH`, `PUT`, and `DELETE` requests.  
+These requests _must_ specify a JSON encoding with a content-type header <strong>`Content-Type: application/json`</strong>.  
+Unencoded requests to endpoints that expect an encoding for the payload, will receive a `400 Bad Request` response.  
 Requests with an encoding that's not supported by the endpoint, will receive a `406 Not Acceptable` response.
 
 All endpoints return data in JSON format. Media types specifed in the `Accept` header, if provided, will be ignored.
+
+### Validation
+
+Client-submitted data goes through several validations.
+
+When validation fails, the response code will be `422 Unprocessable Entity`.
+The response body will be a JSON document with an `errors` property that contains a list of error objects.
+
+Each error object will contain a `message` property. Depending on the validation, there may be an optional `uri` property, which represents a [JSON Pointer][] URI fragment to identify where the violation occurred.
+
+For example, a payload such as
+```json
+{
+  "product_code": 123,
+  "units_prices": [
+    {"price_cents": 100},
+    {"price_cents": 1.00, "unit": "kg"},
+  ]
+}
+```
+
+Could produce an error response like
+
+```json
+{
+  "errors": [
+    {
+      "uri": "#",
+      "message": "Required property name was not present."
+    },
+    {
+      "uri": "#/product_code",
+      "message": "Type mismatch. Expected String but got Integer."
+    },
+    {
+      "uri": "#/units_prices/0",
+      "message": "Required property unit was not present."
+    },
+    {
+      "uri": "#/units_prices/1/price_cents",
+      "message": "Type mismatch. Expected Integer but got Number."
+    }
+  ]
+}
+```
 
 ---
 
@@ -118,3 +163,4 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 
 [ISO 4217]: https://en.wikipedia.org/wiki/ISO_4217
 [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+[JSON Pointer]: https://tools.ietf.org/html/rfc6901#section-6
