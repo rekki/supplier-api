@@ -1,4 +1,4 @@
-# REKKI - ITEM API
+# REKKI - CATALOGUE API
 
 Suppliers can use the Item API to manage their item catalog.
 
