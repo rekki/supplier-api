@@ -1,9 +1,16 @@
-# REKKI - SUPPLIER API
+# REKKI - ORDER API
 
 The base URL for all API endpoints is `https://backend.live.rekki.com`
 
 ## LIST ORDERS
 ### `POST /api/catalog/integration/list_orders_by_supplier`
+
+Lists all orders placed for the supplier that were placed through REKKI.
+
+Orders are limited to max 30 days old (i.e. timestamp must be within 30 days).
+
+We recommend polling for orders by setting the new request timestamp to the time of the last successful request.
+
 
 ### Request Headers
 
@@ -12,7 +19,7 @@ The base URL for all API endpoints is `https://backend.live.rekki.com`
 | `Content-Type: application/json` | Indicates that the request body is of JSON media type | Yes|
 | `Authorization: Bearer <api_token>` | Authentication. Contact integrations@rekki.com for a token | Yes |
 
-### Request Body
+### Request Parameters
 
 | Property | Type | Description | Required? |
 | --- | --- | --- | --- |
@@ -20,17 +27,12 @@ The base URL for all API endpoints is `https://backend.live.rekki.com`
 
 [UNIX timestamp]: https://www.epochconverter.com/
 
-### Constraints and Best Practices
-
-- Orders are limited to max 30 days old (i.e. timestamp must be within 30 days)
-- Poll for orders by setting the new request timestamp to the time of the last successful request
-
 ### Example Request
 
 ```bash
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
      -H "Content-Type: application/json" \
-     -H "Authorization: Bearer XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX" \
+     -H "Authorization: Bearer $API_TOKEN" \
      -d "{\"since\":1565610869}"
 ```
 
