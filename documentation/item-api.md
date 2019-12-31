@@ -162,6 +162,76 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 
 ---
 
+## RETRIEVE ITEM
+### `GET /api/catalog/integration/v1/item/:id`
+<!-- <details><summary>Show details</summary> -->
+
+Retrieve an item from your catalog by its unique ID.
+
+### Parameters
+
+- **`id`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  ID of the item to retrieve. Item IDs are discoverable when [listing items](#list-items).
+
+### Response
+
+Status: `200 OK`
+
+Body: JSON object of the item that was retrieved.
+
+- **`id`**  
+  REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
+- **`product_code`**  
+  Product code for the item that maps to the supplier's catalog.  
+  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+- **`name`**  
+  Item name as would be defined on the customer's product list.
+- **`currency`**  
+  Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
+- **`units_prices`**  
+  List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  
+  A unit that the item can be ordered in.
+- **`units_prices.price_cents`**  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+  Items without price data will show a default placeholder of 0.
+- **`created_at`**  
+  Datetime when the catalog item was created on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+- **`updated_at`**  
+  Datetime when the catalog item was last updated on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+
+### Example Request
+
+```bash
+curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/item/17238" \
+     -H "Authorization: Bearer $API_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+### Example Response
+
+```json
+{
+  "id": 17238,
+  "product_code": "RT1001",
+  "name": "Dark Red Kidney Beans",
+  "currency": "USD",
+  "units_prices": [
+    {
+      "unit": "2Lbs bags (910g)",
+      "price_cents": 759
+    }
+  ],
+  "created_at": "2019-11-10T20:57:22Z",
+  "updated_at": "2019-11-10T20:57:22Z"
+}
+```
+
+---
+
 ## ADD ITEM
 ### `POST /api/catalog/integration/v1/items`
 <!-- <details><summary>Show details</summary> -->
