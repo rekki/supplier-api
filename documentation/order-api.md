@@ -47,6 +47,7 @@ Each order has metadata such as delivery date and order items.
     {
       "customer_account_no": "R8813", 
       "confirmed_at": "2019-08-12T12:20:10.968294",
+      "location_name": "Coffee & Cake Cafe",
       "delivery_address": "123 Fake Street, Test",
       "delivery_on": "2019-08-29",
       "inserted_at_ts": 1565458065,
@@ -73,6 +74,7 @@ Each order has metadata such as delivery date and order items.
 
 * `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://tulip.rekki.com ). 
 * `confirmed_at` the time at which the supplier confirmed the order (via email or from the REKKI supplier app)
+* `location_name` the name of the location that placed the order, can be NULL
 * `delivery_address` delivery address for this specific order (address, postcode)
 * `delivery_on` expected delivery date (when users place orders they specify for which day it is supposed to be delivered)
 * `inserted_at_ts` when was the order created by the customer (timestamp)
