@@ -27,6 +27,15 @@ We recommend polling for orders by setting the new request timestamp to the time
 
 [UNIX timestamp]: https://www.epochconverter.com/
 
+After you start using the API, you should request orders *since* last
+received order's 1577959339, since the API returns orders created *>=*
+of the requested timestamp, you will *always* get at order from which
+you took the timestamp in the response. This will be explained again
+in the provided [example](#example-usage).
+
+Keep in mind that since you can have more than one order per `since`,
+you must not do `since: last_order.inserted_at_ts + 1`.
+
 ### Example Request
 
 ```bash
@@ -127,6 +136,10 @@ const poll = async function(token, last_rekki_order_time) {
 
     for (let order of response.orders) {
       if (order.reference == last_order_reference) {
+        // here is where we are ignoring the order we
+        // took the inserted_at_ts from
+        // but since we can have more orders in the same inserted_at_ts
+        // you can't just do since: inserted_at_ts+1
         continue;
       }    
       if (order.inserted_at_ts >= last_rekki_order_time) {
