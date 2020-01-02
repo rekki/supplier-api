@@ -34,7 +34,8 @@ you took the timestamp in the response. This will be explained again
 in the provided [example](#example-usage).
 
 Keep in mind that since you can have more than one order per `since`,
-you must not do `since: last_order.inserted_at_ts + 1`.
+you must not do `since: last_order.inserted_at_ts + 1`, but keep the
+last order you received's `reference` and ignore the duplicate.
 
 ### Example Request
 
