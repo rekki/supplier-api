@@ -28,7 +28,7 @@ We recommend polling for orders by setting the new request timestamp to the time
 [UNIX timestamp]: https://www.epochconverter.com/
 
 After you start using the API, you should request orders *since* last
-received order's 1577959339, since the API returns orders created **>=**
+received order's `inserted_at_ns`, since the API returns orders created **>=**
 of the requested timestamp, you will **always** get at order from which
 you took the timestamp in the response. This will be explained again
 in the provided [example](#example-usage).
