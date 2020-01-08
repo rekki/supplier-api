@@ -18,6 +18,7 @@ We recommend polling for orders by setting the new request timestamp to the time
 | --- | --- | --- |
 | `Content-Type: application/json` | Indicates that the request body is of JSON media type | Yes|
 | `Authorization: Bearer <api_token>` | Authentication. Contact integrations@rekki.com for a token | Yes |
+| `X-REKKI-Authorization-Type: supplier_api_token` | Authentication Token type | Yes | 
 
 ### Request Parameters
 
@@ -43,6 +44,7 @@ last order you received's `reference` and ignore the duplicate.
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -d "{\"since\":1565610869}"
 ```
 
@@ -123,6 +125,7 @@ const fetch_orders = async function(token, since) {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
+        "X-REKKI-Authorization-Type": "supplier_api_token",
         "Content-Type": "application/json",
         Accept: "application/json"
       },
