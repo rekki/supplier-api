@@ -9,6 +9,8 @@ The base URL for all API endpoints is **`https://backend.live.rekki.com`**.
 Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.  
 Unauthenticated requests will receive a `401 Unauthorized` response.
 
+Requests _must_ also specify the token type via the header <strong><code>X-REKKI-Authorization-Type: supplier_api_token</code></strong>.
+
 Contact integrations@rekki.com for an API token.
 
 ### Parameters
@@ -114,7 +116,8 @@ Body: JSON object with a `data` property that contains catalog items of the auth
 
 ```bash
 curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
-     -H "Authorization: Bearer $API_TOKEN"
+     -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token"
 ```
 
 ### Example Response
@@ -208,6 +211,7 @@ Body: JSON object of the item that was retrieved.
 ```bash
 curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/item/17238" \
      -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json"
 ```
 
@@ -290,6 +294,7 @@ Body: JSON object of the item that was added to the catalog of the authenticated
 ```bash
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
      -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json" \
      -d @item_data.json
 ```
