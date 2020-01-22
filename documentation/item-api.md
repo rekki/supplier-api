@@ -72,7 +72,7 @@ Could produce an error response like
 
 ---
 
-## LIST ITEMS
+## LIST ITEMS  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
 ### `GET /api/catalog/integration/v1/items`
 <!-- <details><summary>Show details</summary> -->
 
@@ -169,7 +169,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 
 ---
 
-## RETRIEVE ITEM
+## RETRIEVE ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
 ### `GET /api/catalog/integration/v1/item/:id`
 <!-- <details><summary>Show details</summary> -->
 
@@ -243,7 +243,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/item/1723
 
 ---
 
-## ADD ITEM
+## ADD ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
 ### `POST /api/catalog/integration/v1/items`
 <!-- <details><summary>Show details</summary> -->
 
