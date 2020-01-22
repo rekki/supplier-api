@@ -105,6 +105,8 @@ Body: JSON object with a `data` property that contains catalog items of the auth
   The order price in cents for the item per unit.  
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
   Items without price data will show a default placeholder of 0.
+- **`availability`**  
+  Availability status of the item. Defaults to in_stock.
 - **`created_at`**  
   Datetime when the catalog item was created on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
@@ -136,6 +138,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
           "price_cents": 0
         }
       ],
+      "availability": "in_stock",
       "created_at": "2019-11-04T08:38:48Z",
       "updated_at": "2019-11-04T08:38:57Z"
     },
@@ -154,6 +157,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
           "price_cents": 1200
         }
       ],
+      "availability": "out_of_stock",
       "created_at": "2019-10-11T09:26:13Z",
       "updated_at": "2019-10-11T09:26:13Z"
     }
@@ -199,6 +203,8 @@ Body: JSON object of the item that was retrieved.
   The order price in cents for the item per unit.  
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
   Items without price data will show a default placeholder of 0.
+- **`availability`**  
+  Availability status of the item. Defaults to in_stock.
 - **`created_at`**  
   Datetime when the catalog item was created on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
@@ -229,6 +235,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/item/1723
       "price_cents": 759
     }
   ],
+  "availability": "discontinued",
   "created_at": "2019-11-10T20:57:22Z",
   "updated_at": "2019-11-10T20:57:22Z"
 }
@@ -258,6 +265,8 @@ Creates an item on your catalog.
 - **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>  
   The order price in cents for the item per unit.  
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
+- **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional, default is "in_stock"</span>  
+  Availability status of the item. Can be "in_stock", "out_of_stock", or "discontinued".
 
 ### Response
 
@@ -282,6 +291,8 @@ Body: JSON object of the item that was added to the catalog of the authenticated
   The order price in cents for the item per unit.  
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
   Items without price data will show a default placeholder of 0.
+- **`availability`**  
+  Availability status of the item. Defaults to in_stock.
 - **`created_at`**  
   Datetime when the catalog item was created on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
@@ -308,7 +319,8 @@ Where `item_data.json` contains the payload
   "units_prices": [
     {"unit": "each", "price_cents": 100},
     {"unit": "kg", "price_cents": 1000}
-  ]
+  ],
+  "availability": "in_stock",
 }
 ```
 
@@ -330,6 +342,7 @@ Where `item_data.json` contains the payload
       "price_cents": 1000
     }
   ],
+  "availability": "in_stock",
   "created_at": "2019-11-10T20:57:22Z",
   "updated_at": "2019-11-10T20:57:22Z"
 }
