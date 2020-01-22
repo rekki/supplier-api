@@ -170,14 +170,14 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 ---
 
 ## RETRIEVE ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
-### `GET /api/catalog/integration/v1/item/:id`
+### `GET /api/catalog/integration/v1/items/:id`
 <!-- <details><summary>Show details</summary> -->
 
 Retrieve an item from your catalog by its unique ID.
 
 ### Parameters
 
-- **`id`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>  
   ID of the item to retrieve. Item IDs are discoverable when [listing items](#list-items).
 
 ### Response
@@ -215,7 +215,7 @@ Body: JSON object of the item that was retrieved.
 ### Example Request
 
 ```bash
-curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/item/17238" \
+curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items/17238" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json"
