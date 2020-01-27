@@ -350,6 +350,104 @@ Where `item_data.json` contains the payload
 
 </details>
 
+## UPDATE ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
+### `POST /api/catalog/integration/v1/items/:id`
+<!-- <details><summary>Show details</summary> -->
+
+Updates an item on your catalog.
+
+Only certain properties of an item can be updated.  
+An item's product code cannot be updated for example.
+Instead the item can be discontinued and a new item can be created.
+
+### Parameters
+
+- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>  
+  ID of the item to update. Item IDs are discoverable when [listing items](#list-items).
+- **`name`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Item name as would be defined on the customer's product list.
+- **`currency`**  <span style="font-size: 12px; font-weight: 500;">optional, default is GBP</span>  
+  Currency code for the price. In [ISO 4217][] three-letter format.
+- **`units_prices`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+    List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  <span style="font-size: 12px; font-weight: 500;">required when changing units_prices</span>  
+  A unit that the item can be ordered in.
+- **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
+- **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Availability status of the item. Can be "in_stock", "out_of_stock", or "discontinued".
+
+### Response
+
+Status: `200 OK`
+
+Body: JSON object of the updated item.
+
+- **`id`**  
+  REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
+- **`product_code`**  
+  Product code for the item that maps to the supplier's catalog.  
+  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+- **`name`**  
+  Item name as would be defined on the customer's product list.
+- **`currency`**  
+  Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
+- **`units_prices`**  
+  List of units and their prices that the item can be ordered in. 
+- **`units_prices.unit`**  
+  A unit that the item can be ordered in.
+- **`units_prices.price_cents`**  
+  The order price in cents for the item per unit.  
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+  Items without price data will show a default placeholder of 0.
+- **`availability`**  
+  Availability status of the item. Defaults to in_stock.
+- **`created_at`**  
+  Datetime when the catalog item was created on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+- **`updated_at`**  
+  Datetime when the catalog item was last updated on REKKI.  
+  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
+
+### Example Request
+
+In this example, an existing item is marked as discontinued and its units and prices are removed by overwriting them with an empty list.
+
+```bash
+curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items/44724" \
+     -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token" \
+     -H "Content-Type: application/json" \
+     -d @item_data.json
+```
+
+Where `item_data.json` contains the payload
+```json
+{
+  "availability": "discontinued",
+  "units_prices": [],
+}
+```
+
+### Example Response
+
+```json
+{
+  "id": 44724,
+  "product_code": "C1235",
+  "name": "Organic Banana",
+  "currency": "GBP",
+  "units_prices": [],
+  "availability": "discontinued",
+  "created_at": "2019-11-10T20:57:22Z",
+  "updated_at": "2020-01-27T12:31:43Z"
+}
+```
+
+</details>
+
+
 [ISO 4217]: https://en.wikipedia.org/wiki/ISO_4217
 [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
 [JSON Pointer]: https://tools.ietf.org/html/rfc6901#section-6
