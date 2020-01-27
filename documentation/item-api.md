@@ -422,22 +422,14 @@ Body: JSON object of the updated item.
 
 ### Example Request
 
-In this example, an existing item is marked as discontinued and its units and prices are removed by overwriting them with an empty list.
+In this example, an existing item is marked as discontinued.
 
 ```bash
 curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items/44724" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json" \
-     -d @item_data.json
-```
-
-Where `item_data.json` contains the payload
-```json
-{
-  "availability": "discontinued",
-  "units_prices": [],
-}
+     -d '{"availability": "discontinued"}'
 ```
 
 ### Example Response
@@ -448,7 +440,16 @@ Where `item_data.json` contains the payload
   "product_code": "C1235",
   "name": "Organic Banana",
   "currency": "GBP",
-  "units_prices": [],
+  "units_prices": [
+    {
+      "unit": "each",
+      "price_cents": 100
+    },
+    {
+      "unit": "kg",
+      "price_cents": 1000
+    }
+  ],
   "availability": "discontinued",
   "created_at": "2019-11-10T20:57:22Z",
   "updated_at": "2020-01-27T12:31:43Z"
