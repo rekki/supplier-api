@@ -70,9 +70,11 @@ Could produce an error response like
 }
 ```
 
+<sup><a href="#">Back to top ↰</a></sup>
+
 ---
 
-## LIST ITEMS  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
+## LIST ITEMS
 ### `GET /api/catalog/integration/v1/items`
 <!-- <details><summary>Show details</summary> -->
 
@@ -167,9 +169,11 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 
 </details>
 
+<sup><a href="#">Back to top ↰</a></sup>
+
 ---
 
-## RETRIEVE ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
+## RETRIEVE ITEM
 ### `GET /api/catalog/integration/v1/items/:id`
 <!-- <details><summary>Show details</summary> -->
 
@@ -241,9 +245,11 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items/172
 }
 ```
 
+<sup><a href="#">Back to top ↰</a></sup>
+
 ---
 
-## ADD ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
+## ADD ITEM
 ### `POST /api/catalog/integration/v1/items`
 <!-- <details><summary>Show details</summary> -->
 
@@ -350,7 +356,11 @@ Where `item_data.json` contains the payload
 
 </details>
 
-## UPDATE ITEM  <span style="font-size: 12px; font-weight: 500;"><a href="#">Back to top ↰</a></span>
+<sup><a href="#">Back to top ↰</a></sup>
+
+---
+
+## UPDATE ITEM
 ### `POST /api/catalog/integration/v1/items/:id`
 <!-- <details><summary>Show details</summary> -->
 
