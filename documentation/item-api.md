@@ -75,7 +75,7 @@ Could produce an error response like
 ---
 
 ## LIST ITEMS
-### `GET /api/catalog/integration/v1/items`
+### `GET /api/integration/v1/catalog/items`
 <!-- <details><summary>Show details</summary> -->
 
 Lists all your catalog items. Sorted by creation date, with the oldest appearing first.
@@ -119,7 +119,7 @@ Body: JSON object with a `data` property that contains catalog items of the auth
 ### Example Request
 
 ```bash
-curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
+curl -X GET "https://backend.live.rekki.com/api/integration/v1/catalog/items" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token"
 ```
@@ -174,7 +174,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
 ---
 
 ## RETRIEVE ITEM
-### `GET /api/catalog/integration/v1/items/:id`
+### `GET /api/integration/v1/catalog/items/:id`
 <!-- <details><summary>Show details</summary> -->
 
 Retrieve an item from your catalog by its unique ID.
@@ -219,7 +219,7 @@ Body: JSON object of the item that was retrieved.
 ### Example Request
 
 ```bash
-curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items/17238" \
+curl -X GET "https://backend.live.rekki.com/api/integration/v1/catalog/items/17238" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json"
@@ -250,7 +250,7 @@ curl -X GET "https://backend.live.rekki.com/api/catalog/integration/v1/items/172
 ---
 
 ## ADD ITEM
-### `POST /api/catalog/integration/v1/items`
+### `POST /api/integration/v1/catalog/items`
 <!-- <details><summary>Show details</summary> -->
 
 Creates an item on your catalog.
@@ -309,7 +309,7 @@ Body: JSON object of the item that was added to the catalog of the authenticated
 ### Example Request
 
 ```bash
-curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items" \
+curl -X POST "https://backend.live.rekki.com/api/integration/v1/catalog/items" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json" \
@@ -361,7 +361,7 @@ Where `item_data.json` contains the payload
 ---
 
 ## UPDATE ITEM
-### `POST /api/catalog/integration/v1/items/:id`
+### `POST /api/integration/v1/catalog/items/:id`
 <!-- <details><summary>Show details</summary> -->
 
 Updates an item on your catalog.
@@ -425,7 +425,7 @@ Body: JSON object of the updated item.
 In this example, an existing item is marked as discontinued.
 
 ```bash
-curl -X POST "https://backend.live.rekki.com/api/catalog/integration/v1/items/44724" \
+curl -X POST "https://backend.live.rekki.com/api/integration/v1/catalog/items/44724" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json" \
