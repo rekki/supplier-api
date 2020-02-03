@@ -261,7 +261,7 @@ curl -X POST "https://backend.live.rekki.com/api/integration/v1/orders/W2978351/
   "created_at": "2020-01-31T18:08:05Z",
   "contact_name": "Jane Doe",
   "contact_info": "+447123456789",
-  "confirmed_at": "2020-01-31T18:12:55.260701Z",
+  "confirmed_at": "2020-01-31T18:12:55Z",
   "items": [
     {
       "id": "b285af6ba51010750bba1e955996b0ad",
