@@ -284,8 +284,30 @@ Creates an item on your catalog.
 - **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>  
   The order price in cents for the item per unit.  
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
+- **`units_prices.stock_count`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  The number of items in stock for the related unit.
 - **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional, default is "in_stock"</span>  
   Availability status of the item. Can be "in_stock", "out_of_stock", or "discontinued".
+- **`description`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Short description of the item.
+- **`allergens`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  List of allergens for the item, if any.
+- **`allergens.type`**  <span style="font-size: 12px; font-weight: 500;">required when allergens is given</span>  
+  Type of allergy. For example "contains peanuts" or "may contain peanuts".
+- **`allergens.symptoms`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  List of symptoms for the allergy.
+- **`order_cutoff_times`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Cutt-off times are the minimum amount of time before delivery when the item can still be ordered.
+- **`order_cutoff_times.{mon,tue,wed,thu,fri,sat,sun}`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Minimum amount of time, in hours, that an item needs to be ordered in advance of delivery for the given day.
+- **`replacement_products`**   <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  List of product codes for alternative items when this item is not available.
+- **`seasonality`**   <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  List of date ranges when the item is in-season. 
+- **`seasonality.start_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>  
+  The start date when the item is in season. In [ISO 8601][] calendar date format `YYYY-MM-DD`.
+- **`seasonality.end_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>  
+  The end date when the item is in season. In [ISO 8601][] calendar date format `YYYY-MM-DD`.
 
 ### Response
 
@@ -337,9 +359,30 @@ Where `item_data.json` contains the payload
   "currency": "GBP",
   "units_prices": [
     {"unit": "each", "price_cents": 100},
-    {"unit": "kg", "price_cents": 1000}
+    {"unit": "kg", "price_cents": 1000, "stock_count": 300}
   ],
   "availability": "in_stock",
+  "description": "Ripe. Gluten free. Vegan. Organic. Origin Costa Rica",
+  "allergens": [
+    {
+      "type": "Banana allergy",
+      "symptoms": [
+        "itching of the mouth and throat",
+        "itchy rash (hives, urticaria)",
+        "skin or mucosal swellings (angioedema)",
+        "in rare cases narrowing of the throat, wheezing, and even collapse"
+      ]
+    }
+  ],
+  "order_cutoff_times": {
+    "mon": 48,
+    "tue": 24,
+    "wed": 24,
+    "thu": 24,
+    "fri": 24
+  },
+  "replacement_products": ["C1236", "C1237", "C1238"],
+  "seasonality": [{"start_date": "2020-01-01", "end_date": "2020-12-31"}]
 }
 ```
 
@@ -400,6 +443,8 @@ Instead the item can be discontinued and a new item can be created.
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
 - **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
   Availability status of the item. Can be "in_stock", "out_of_stock", or "discontinued".
+- **`description`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+  Short description of the item.
 
 ### Response
 
