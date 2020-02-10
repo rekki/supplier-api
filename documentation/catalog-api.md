@@ -1,10 +1,18 @@
 # REKKI - CATALOGUE API
 
+- [LIST ITEMS](#list-items)
+- [RETRIEVE ITEM](#retrieve-item)
+- [ADD ITEM](#add-item)
+- [UPDATE ITEM](#update-item)
+
+---
+
 Suppliers can use the Item API to manage their item catalog.
 
 The base URL for all API endpoints is **`https://backend.live.rekki.com`**.
 
 ### Authentication
+<!-- <details><summary>Show details</summary> -->
 
 Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.  
 Unauthenticated requests will receive a `401 Unauthorized` response.
@@ -12,8 +20,10 @@ Unauthenticated requests will receive a `401 Unauthorized` response.
 Requests _must_ also specify the token type via the header <strong><code>X-REKKI-Authorization-Type: supplier_api_token</code></strong>.
 
 Contact integrations@rekki.com for an API token.
+</details>
 
 ### Parameters
+<!-- <details><summary>Show details</summary> -->
 
 Some endpoints may take parameters in the URL, such as segments in the path or key-values in a query string.  
 For example `GET https://example.com/api/resource/:id?limit=10`.
@@ -24,8 +34,10 @@ Unencoded requests to endpoints that expect an encoding for the payload, will re
 Requests with an encoding that's not supported by the endpoint, will receive a `406 Not Acceptable` response.
 
 All endpoints return data in JSON format. Media types specifed in the `Accept` header, if provided, will be ignored.
+</details>
 
 ### Validation
+<!-- <details><summary>Show details</summary> -->
 
 Client-submitted data goes through several validations.
 
@@ -69,6 +81,7 @@ Could produce an error response like
   ]
 }
 ```
+</details>
 
 <sup><a href="#">Back to top ↰</a></sup>
 

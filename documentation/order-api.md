@@ -1,5 +1,10 @@
 # REKKI - ORDER API
 
+- [LIST ORDERS](#list-orders)
+- [CONFIRM ORDER](#confirm-order)
+
+---
+
 The base URL for all API endpoints is `https://backend.live.rekki.com`
 
 ## LIST ORDERS
