@@ -5,7 +5,7 @@
 
 ---
 
-The base URL for all API endpoints is `https://backend.live.rekki.com`
+The base URL for all API endpoints is `https://api.rekki.com`
 
 ## LIST ORDERS
 ### `POST /api/catalog/integration/list_orders_by_supplier`
@@ -46,7 +46,7 @@ last order you received's `reference` and ignore the duplicate.
 ### Example Request
 
 ```bash
-curl -X POST "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier" \
+curl -X POST "https://api.rekki.com/api/catalog/integration/list_orders_by_supplier" \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
@@ -125,7 +125,7 @@ const sleep = function sleep(ms) {
 
 const fetch_orders = async function(token, since) {
   let r = await fetch(
-    "https://backend.live.rekki.com/api/catalog/integration/list_orders_by_supplier",
+    "https://api.rekki.com/api/catalog/integration/list_orders_by_supplier",
     {
       method: "POST",
       headers: {
@@ -246,7 +246,7 @@ Body: `{"error":"Order not found"}`
 ### Example Request
 
 ```bash
-curl -X POST "https://backend.live.rekki.com/api/integration/v1/orders/W2978351/confirm" \
+curl -X POST "https://api.rekki.com/api/integration/v1/orders/W2978351/confirm" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json"
