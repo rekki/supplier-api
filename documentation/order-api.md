@@ -91,7 +91,7 @@ Each order has metadata such as delivery date and order items.
 
 ### Response Properties
 
-* `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://tulip.rekki.com ). 
+* `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://supplier.rekki.com ). 
 * `confirmed_at` the time at which the supplier confirmed the order (via email, or via the REKKI supplier app, or via the REKKI API)
 * `contact_info` the phone number or email address for the person who placed the order
 * `contact_name` the full name of the person who placed the order
@@ -104,7 +104,7 @@ Each order has metadata such as delivery date and order items.
 * `reference` REKKI's order reference
   
 &nbsp;
-* `item.product_code` product code that maps to the supplier catalog, suppliers can modify the product code for the future orders for this customer at https://tulip.rekki.com
+* `item.product_code` product code that maps to the supplier catalog, suppliers can modify the product code for the future orders for this customer at https://supplier.rekki.com
 * `item.id` REKKI's item id, for REKKI internal reference 
 * `item.price` the item price as set in REKKI 
 * `item.quantity` quantity
@@ -206,7 +206,7 @@ Body: JSON object of the confirmed order
 - **`delivery_address`**  
   Delivery address for this specific order (address, postcode).
 - **`customer_account_no`**  
-  The account number for the customer within the supplier system. Set this up in the REKKI supplier app (https://tulip.rekki.com). 
+  The account number for the customer within the supplier system. Set this up in the REKKI supplier app (https://supplier.rekki.com). 
 - **`created_at`**  
   Datetime when the order was created by the customer on REKKI.  
   In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
@@ -223,7 +223,7 @@ Body: JSON object of the confirmed order
   REKKI's item id. For REKKI internal reference.
 - **`items.product_code`**  
   Product code of the item. Maps to the supplier's catalog.  
-  Suppliers can modify the product code on the REKKI supplier app (https://tulip.rekki.com) for future orders from this customer.
+  Suppliers can modify the product code on the REKKI supplier app (https://supplier.rekki.com) for future orders from this customer.
 - **`items.name`**  
   Name of the item as defined by the customer on their product list.
 - **`items.units`**  
