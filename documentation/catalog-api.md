@@ -44,7 +44,7 @@ Body: JSON object with a `data` property that contains catalog items of the auth
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
 - **`product_code`**  
   Product code for the item that maps to the supplier's catalog.  
-  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+  Suppliers can modify the product code for future orders at https://supplier.rekki.com
 - **`name`**  
   Item name as would be defined on the customer's product list.
 - **`currency`**  
@@ -132,7 +132,7 @@ Body: JSON object of the item that was retrieved.
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
 - **`product_code`**  
   Product code for the item that maps to the supplier's catalog.  
-  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+  Suppliers can modify the product code for future orders at https://supplier.rekki.com
 - **`name`**  
   Item name as would be defined on the customer's product list.
 - **`currency`**  
@@ -233,7 +233,7 @@ delete api
   If `id` is specified the item will be update, if not it will attempt to insert it.
 - **`product_code`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
   Product code for the item that maps to the supplier's catalog.  
-  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+  Suppliers can modify the product code for future orders at https://supplier.rekki.com
 - **`name`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
   Item name as would be defined on the customer's product list.
 - **`currency`**  <span style="font-size: 12px; font-weight: 500;">optional, default is GBP</span>  
@@ -278,7 +278,7 @@ Body: JSON object of the item that was added to the catalog of the authenticated
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
 - **`product_code`**  
   Product code for the item that maps to the supplier's catalog.  
-  Suppliers can modify the product code for future orders at https://tulip.rekki.com
+  Suppliers can modify the product code for future orders at https://supplier.rekki.com
 - **`name`**  
   Item name as would be defined on the customer's product list.
 - **`currency`**  
