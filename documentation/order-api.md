@@ -173,7 +173,7 @@ poll("XXXXXXX-XXXX-XXXX-XXXXX-XXXXXXXXXXXX", parseInt((+new Date() /1000) - 3600
 ---
 
 ## CONFIRM ORDER
-### `POST /api/integration/v1/orders/:reference/confirm`
+### `POST /api/integration/v1/orders/confirm`
 <!-- <details><summary>Show details</summary> -->
 
 Confirm a pending order by its reference code.
@@ -182,71 +182,31 @@ Notifies the buyer that the order has been acknowledged.
 
 ### Parameters
 
-- **`reference`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>  
-  Reference of the order to confirm. Order refs are discoverable when [listing orders](#list-orders).
+- **`orders`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+  Array of References of the orders to confirm. Order refs are discoverable when [listing orders](#list-orders).
 
 ### Response
 
 Status: `200 OK`  
 Body: JSON object of the confirmed order
 
-- **`reference`**  
-  REKKI's order reference to uniquely identify the order.
-- **`notes`**  
-  Notes from the customer at the time of placing the order. Typically refers to that specific order (e.g. "send fresh tomatoes").  
-  Can be NULL.
-- **`supplier_notes`**  
-  Notes from the customer for the supplier. Typically refer to orders in general (e.g. "use back entrance for delivery").  
-  Can be NULL.
-- **`location_name`**  
-  Name of the customer's location that placed the order.  
-  Can be NULL.
-- **`delivery_on`**  
-  Expected delivery date. When customers place orders, they specify for which day it is supposed to be delivered.
-- **`delivery_address`**  
-  Delivery address for this specific order (address, postcode).
-- **`customer_account_no`**  
-  The account number for the customer within the supplier system. Set this up in the REKKI supplier app (https://supplier.rekki.com). 
-- **`created_at`**  
-  Datetime when the order was created by the customer on REKKI.  
-  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
-- **`contact_name`**  
-  The full name of the person who placed the order.
-- **`contact_info`**  
-  The phone number or email address of the customer who placed the order.
-- **`confirmed_at`**  
-  The time at which the supplier confirmed the order.  
-  In [ISO 8601][] UTC format `YYYY-MM-DDTHH:MM:SSZ`.
-- **`items`**  
-  List of product items that the customer added to the order.  
-- **`items.id`**  
-  REKKI's item id. For REKKI internal reference.
-- **`items.product_code`**  
-  Product code of the item. Maps to the supplier's catalog.  
-  Suppliers can modify the product code on the REKKI supplier app (https://supplier.rekki.com) for future orders from this customer.
-- **`items.name`**  
-  Name of the item as defined by the customer on their product list.
-- **`items.units`**  
-  Unit of the item as defined by the customer on their product list.
-- **`items.quantity`**  
-  The customer's requested quantity of the item (in the requested unit).
-- **`items.spec`**  
-  Details or notes provided by the supplier for the item.  
-  Can be NULL. 
-- **`items.price`**  
-  The item price as set in REKKI.  
-  Can be NULL.
+- **`success`**  
+  if the operation is successful
 
-Status: `409 Conflict`  
-Body: `{"error":"Order already confirmed"}`
+Status: `400 Conflict`  
+Body: `{"error":"Order already confirmed","order_id":...}`
 
-Status: `404 Not Found`  
-Body: `{"error":"Order not found"}`
+Status: `400 Not Found`  
+Body: `{"error":"Order not found","order_id":...}`
+
+in errors order_id denotes the order that failed to be confirmed
+
+**the processing stops at first error**
 
 ### Example Request
 
 ```bash
-curl -X POST "https://api.rekki.com/api/integration/v1/orders/W2978351/confirm" \
+curl -X POST -d '{"orders":["W2978351"]}' "https://api.rekki.com/api/integration/v1/orders/confirm" \
      -H "Authorization: Bearer $API_TOKEN" \
      -H "X-REKKI-Authorization-Type: supplier_api_token" \
      -H "Content-Type: application/json"
