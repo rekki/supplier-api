@@ -222,9 +222,8 @@ curl -X DELETE "https://api.rekki.com/api/integration/v1/catalog/items/17238" \
 <!-- <details><summary>Show details</summary> -->
 
 Creates or Updates an item on your catalog. If item with this
-`product_code` already exists, it will return
-{"error":"already_exists"} you must first delete it by using the
-delete api
+`product_code` already exists, you can update this item.
+
 
 ### Parameters
 
