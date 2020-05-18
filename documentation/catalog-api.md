@@ -366,6 +366,59 @@ Where `item_data.json` contains the payload
 
 <sup><a href="#">Back to top ↰</a></sup>
 
+---
+
+## Update item availability
+### `POST /api/integration/v2/catalog/items/availability`
+<!-- <details><summary>Show details</summary> -->
+
+Update availability status for one of the items in the catalog
+
+### Parameters
+
+- **`items`**  <span style="font-size: 12px; font-weight: 500;">required</span>
+  List of items to update availability for
+- **`items.availability`**  <span style="font-size: 12px; font-weight: 500;">required</span>
+  State of the item. Possible values are `in_stock` and `out_of_stock`
+- **`items.product_code`**  <span style="font-size: 12px; font-weight: 500;">required</span>
+  Product code of an item in the catalog
+
+### Response
+
+Status: `200 OK`
+
+Body: JSON object that identifies the result of operation
+
+- **`affected`**
+  Number of items actually changed in the catalog
+- **`success`**
+  Result of update, `true` if successful
+
+### Example Request
+
+```bash
+```bash
+curl -X POST "https://api.rekki.com/api/integration/v2/catalog/items/availability" \
+     -H "Authorization: Bearer $API_TOKEN" \
+     -H "X-REKKI-Authorization-Type: supplier_api_token" \
+     -H "Content-Type: application/json" \
+     -d '{ "items": [ { "product_code": "PRODUCT0011", "availability": "in_stock" } ] }'
+```
+```
+
+### Example Response
+
+```json
+{
+  "affected": 1,
+  "success": true
+}
+```
+
+</details>
+
+<sup><a href="#">Back to top ↰</a></sup>
+
 
 [ISO 4217]: https://en.wikipedia.org/wiki/ISO_4217
 [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
