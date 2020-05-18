@@ -23,7 +23,7 @@ We recommend polling for orders by setting the new request timestamp to the time
 | --- | --- | --- |
 | `Content-Type: application/json` | Indicates that the request body is of JSON media type | Yes|
 | `Authorization: Bearer <api_token>` | Authentication. Contact integrations@rekki.com for a token | Yes |
-| `X-REKKI-Authorization-Type: supplier_api_token` | Authentication Token type | Yes | 
+| `X-REKKI-Authorization-Type: supplier_api_token` | Authentication Token type | Yes |
 
 ### Request Parameters
 
@@ -55,14 +55,14 @@ curl -X POST "https://api.rekki.com/api/catalog/integration/list_orders_by_suppl
 
 ### Example Response
 
-The JSON response includes a list of orders that were created since the given timestamp.  
+The JSON response includes a list of orders that were created since the given timestamp.
 Each order has metadata such as delivery date and order items.
 
 ```json
 {
   "orders": [
     {
-      "customer_account_no": "R8813", 
+      "customer_account_no": "R8813",
       "confirmed_at": "2019-08-12T12:20:10.968294",
       "contact_info": "+447123456789",
       "contact_name": "John Doe",
@@ -91,7 +91,7 @@ Each order has metadata such as delivery date and order items.
 
 ### Response Properties
 
-* `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://supplier.rekki.com ). 
+* `customer_account_no` is the account number for customer within the supplier system, this can be setup in REKKI supplier app ( https://supplier.rekki.com ).
 * `confirmed_at` the time at which the supplier confirmed the order (via email, or via the REKKI supplier app, or via the REKKI API)
 * `contact_info` the phone number or email address for the person who placed the order
 * `contact_name` the full name of the person who placed the order
@@ -102,19 +102,19 @@ Each order has metadata such as delivery date and order items.
 * `notes` defined by the user at the moment of making an order and usually refer to that specific order (e.g. "please send fresher tomatoes")
 * `supplier_notes` notes define by the user for the supplier, usually being common across orders (e.g.: "please use the side entrance for delivery")
 * `reference` REKKI's order reference
-  
+
 &nbsp;
 * `item.product_code` product code that maps to the supplier catalog, suppliers can modify the product code for the future orders for this customer at https://supplier.rekki.com
-* `item.id` REKKI's item id, for REKKI internal reference 
-* `item.price` the item price as set in REKKI 
+* `item.id` REKKI's item id, for REKKI internal reference
+* `item.price` the item price as set in REKKI
 * `item.quantity` quantity
-* `item.name` item name as defined on the customer product list 
-* `item.units` item unit as defined on the customer product list 
-* `item.spec` details/notes provided by the supplier for the item 
+* `item.name` item name as defined on the customer product list
+* `item.units` item unit as defined on the customer product list
+* `item.spec` details/notes provided by the supplier for the item
 
 ### Example Usage
 
-In this JavaScript example, all orders are retrieved. Then it keeps pulling for new orders since the last order, every hour. 
+In this JavaScript example, all orders are retrieved. Then it keeps pulling for new orders since the last order, every hour.
 
 ```js
 const fetch = require("node-fetch");
@@ -154,7 +154,7 @@ const poll = async function(token, last_rekki_order_time) {
         // but since we can have more orders in the same inserted_at_ts
         // you can't just do since: inserted_at_ts+1
         continue;
-      }    
+      }
       if (order.inserted_at_ts >= last_rekki_order_time) {
         last_rekki_order_time = order.inserted_at_ts;
         last_order_reference = order.reference;
@@ -182,21 +182,21 @@ Notifies the buyer that the order has been acknowledged.
 
 ### Parameters
 
-- **`orders`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+- **`orders`**  <span style="font-size: 12px; font-weight: 500;">required</span>
   Array of References of the orders to confirm. Order refs are discoverable when [listing orders](#list-orders).
 
 ### Response
 
-Status: `200 OK`  
+Status: `200 OK`
 Body: JSON object of the confirmed order
 
-- **`success`**  
+- **`success`**
   if the operation is successful
 
-Status: `400 Conflict`  
+Status: `400 Conflict`
 Body: `{"error":"Order already confirmed","order_id":...}`
 
-Status: `400 Not Found`  
+Status: `400 Not Found`
 Body: `{"error":"Order not found","order_id":...}`
 
 in errors order_id denotes the order that failed to be confirmed
