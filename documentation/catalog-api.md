@@ -14,7 +14,7 @@ The base URL for all API endpoints is **`https://api.rekki.com`**.
 ### Authentication
 <!-- <details><summary>Show details</summary> -->
 
-Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.  
+Requests _must_ be authenticated via an authorization header <strong><code>Authorization: Bearer <em>TOKEN</em></code></strong>.
 Unauthenticated requests will receive a `401 Unauthorized` response.
 
 Requests _must_ also specify the token type via the header <strong><code>X-REKKI-Authorization-Type: supplier_api_token</code></strong>.
@@ -40,24 +40,24 @@ Status: `200 OK`
 
 Body: JSON object with a `data` property that contains catalog items of the authenticated supplier.
 
-- **`id`**  
+- **`id`**
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
-- **`product_code`**  
-  Product code for the item that maps to the supplier's catalog.  
+- **`product_code`**
+  Product code for the item that maps to the supplier's catalog.
   Suppliers can modify the product code for future orders at https://supplier.rekki.com
-- **`name`**  
+- **`name`**
   Item name as would be defined on the customer's product list.
-- **`currency`**  
+- **`currency`**
   Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
-- **`units_prices`**  
-  List of units and their prices that the item can be ordered in. 
-- **`units_prices.unit`**  
+- **`units_prices`**
+  List of units and their prices that the item can be ordered in.
+- **`units_prices.unit`**
   A unit that the item can be ordered in.
-- **`units_prices.price_cents`**  
-  The order price in cents for the item per unit.  
-  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+- **`units_prices.price_cents`**
+  The order price in cents for the item per unit.
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
   Items without price data will show a default placeholder of 0.
-- **`availability`**  
+- **`availability`**
   Availability status of the item. Defaults to in_stock.
 
 ### Example Request
@@ -121,31 +121,31 @@ Retrieve an item from your catalog by its unique ID.
 
 ### Parameters
 
-- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>  
+- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>
   ID of the item to retrieve. Item IDs are discoverable when [listing items](#list-items).
 
 ### Response
 
 Body: JSON object of the item that was retrieved.
 
-- **`id`**  
+- **`id`**
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
-- **`product_code`**  
-  Product code for the item that maps to the supplier's catalog.  
+- **`product_code`**
+  Product code for the item that maps to the supplier's catalog.
   Suppliers can modify the product code for future orders at https://supplier.rekki.com
-- **`name`**  
+- **`name`**
   Item name as would be defined on the customer's product list.
-- **`currency`**  
+- **`currency`**
   Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
-- **`units_prices`**  
-  List of units and their prices that the item can be ordered in. 
-- **`units_prices.unit`**  
+- **`units_prices`**
+  List of units and their prices that the item can be ordered in.
+- **`units_prices.unit`**
   A unit that the item can be ordered in.
-- **`units_prices.price_cents`**  
-  The order price in cents for the item per unit.  
-  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+- **`units_prices.price_cents`**
+  The order price in cents for the item per unit.
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
   Items without price data will show a default placeholder of 0.
-- **`availability`**  
+- **`availability`**
   Availability status of the item. Defaults to in_stock.
 
 ### Example Request
@@ -185,14 +185,14 @@ Delete an item from your catalog by its unique ID.
 
 ### Parameters
 
-- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>  
+- **`id`**  <span style="font-size: 12px; font-weight: 500;">required (query parameter)</span>
   ID of the item to retrieve. Item IDs are discoverable when [listing items](#list-items).
 
 ### Response
 
 Body: JSON object of the item that was retrieved.
 
-- **`success`**  
+- **`success`**
   true if delete was successfull
 
 ### Example Request
@@ -227,70 +227,70 @@ Creates or Updates an item on your catalog. If item with this
 
 ### Parameters
 
-- **`id`**  
+- **`id`**
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
   If `id` is specified the item will be update, if not it will attempt to insert it.
-- **`product_code`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
-  Product code for the item that maps to the supplier's catalog.  
+- **`product_code`**  <span style="font-size: 12px; font-weight: 500;">required</span>
+  Product code for the item that maps to the supplier's catalog.
   Suppliers can modify the product code for future orders at https://supplier.rekki.com
-- **`name`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+- **`name`**  <span style="font-size: 12px; font-weight: 500;">required</span>
   Item name as would be defined on the customer's product list.
-- **`currency`**  <span style="font-size: 12px; font-weight: 500;">optional, default is GBP</span>  
+- **`currency`**  <span style="font-size: 12px; font-weight: 500;">optional, default is GBP</span>
   Currency code for the price. In [ISO 4217][] three-letter format.
-- **`units_prices`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
-  List of units and their prices that the item can be ordered in. 
-- **`units_prices.unit`**  <span style="font-size: 12px; font-weight: 500;">required</span>  
+- **`units_prices`**  <span style="font-size: 12px; font-weight: 500;">required</span>
+  List of units and their prices that the item can be ordered in.
+- **`units_prices.unit`**  <span style="font-size: 12px; font-weight: 500;">required</span>
   A unit that the item can be ordered in.
-- **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>  
-  The order price in cents for the item per unit.  
+- **`units_prices.price_cents`**  <span style="font-size: 12px; font-weight: 500;">optional, default is 0</span>
+  The order price in cents for the item per unit.
   For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
-- **`units_prices.stock_count`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`units_prices.stock_count`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   The number of items in stock for the related unit.
-- **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional, default is "in_stock"</span>  
+- **`availability`**  <span style="font-size: 12px; font-weight: 500;">optional, default is "in_stock"</span>
   Availability status of the item. Can be "in_stock", "out_of_stock", or "discontinued".
-- **`description`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`description`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   Short description of the item.
-- **`allergens`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`allergens`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   List of allergens for the item, if any.
-- **`allergens.type`**  <span style="font-size: 12px; font-weight: 500;">required when allergens is given</span>  
+- **`allergens.type`**  <span style="font-size: 12px; font-weight: 500;">required when allergens is given</span>
   Type of allergy. For example "contains peanuts" or "may contain peanuts".
-- **`allergens.symptoms`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`allergens.symptoms`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   List of symptoms for the allergy.
-- **`order_cutoff_times`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`order_cutoff_times`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   Cutt-off times are the minimum amount of time before delivery when the item can still be ordered.
-- **`order_cutoff_times.{mon,tue,wed,thu,fri,sat,sun}`**  <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`order_cutoff_times.{mon,tue,wed,thu,fri,sat,sun}`**  <span style="font-size: 12px; font-weight: 500;">optional</span>
   Minimum amount of time, in hours, that an item needs to be ordered in advance of delivery for the given day.
-- **`replacement_products`**   <span style="font-size: 12px; font-weight: 500;">optional</span>  
+- **`replacement_products`**   <span style="font-size: 12px; font-weight: 500;">optional</span>
   List of product codes for alternative items when this item is not available.
-- **`seasonality`**   <span style="font-size: 12px; font-weight: 500;">optional</span>  
-  List of date ranges when the item is in-season. 
-- **`seasonality.start_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>  
+- **`seasonality`**   <span style="font-size: 12px; font-weight: 500;">optional</span>
+  List of date ranges when the item is in-season.
+- **`seasonality.start_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>
   The start date when the item is in season. In [ISO 8601][] calendar date format `YYYY-MM-DD`.
-- **`seasonality.end_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>  
+- **`seasonality.end_date`**  <span style="font-size: 12px; font-weight: 500;">required when seasonality is given</span>
   The end date when the item is in season. In [ISO 8601][] calendar date format `YYYY-MM-DD`.
 
 ### Response
 
 Body: JSON object of the item that was added to the catalog of the authenticated supplier.
 
-- **`id`**  
+- **`id`**
   REKKI's ID to uniquely identify the catalog item (for REKKI internal reference).
-- **`product_code`**  
-  Product code for the item that maps to the supplier's catalog.  
+- **`product_code`**
+  Product code for the item that maps to the supplier's catalog.
   Suppliers can modify the product code for future orders at https://supplier.rekki.com
-- **`name`**  
+- **`name`**
   Item name as would be defined on the customer's product list.
-- **`currency`**  
+- **`currency`**
   Currency code for the price. In [ISO 4217][] three-letter format. Defaults to GBP.
-- **`units_prices`**  
-  List of units and their prices that the item can be ordered in. 
-- **`units_prices.unit`**  
+- **`units_prices`**
+  List of units and their prices that the item can be ordered in.
+- **`units_prices.unit`**
   A unit that the item can be ordered in.
-- **`units_prices.price_cents`**  
-  The order price in cents for the item per unit.  
-  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.  
+- **`units_prices.price_cents`**
+  The order price in cents for the item per unit.
+  For example, a currency of GBP with unit 5L and price 850 means a 5L item can be ordered for £8.50.
   Items without price data will show a default placeholder of 0.
-- **`availability`**  
+- **`availability`**
   Availability status of the item. Defaults to in_stock.
 
 ### Example Request
@@ -365,7 +365,6 @@ Where `item_data.json` contains the payload
 </details>
 
 <sup><a href="#">Back to top ↰</a></sup>
-
 
 
 [ISO 4217]: https://en.wikipedia.org/wiki/ISO_4217
