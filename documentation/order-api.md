@@ -2,6 +2,9 @@
 
 - [LIST ORDERS](#list-orders)
 - [CONFIRM ORDER](#confirm-order)
+- [GET ORDERS THAT ARE NOT MARKED AS INTEGRATED](#get-orders-that-are-not-marked-as-integrated)
+- [MARK ORDERS AS SUCCESSFULLY INTEGRATED](#mark-orders-as-integrated)
+- [MARK AN ORDER AS FAILED TO INTEGRATE](#mark-an-order-as-failed-to-integrate)
 
 ---
 
